@@ -1,4 +1,7 @@
 <template>
+  <div>
+    <p>{{ text }}</p>
+  </div>
   <nav>
     <RouterLink to="/">Home</RouterLink>
     <RouterLink to="/about">About</RouterLink>
@@ -15,12 +18,19 @@
 </template>
 
 <script setup>
-import { reactive, provide } from 'vue';
+import { reactive, provide, computed } from 'vue';
+import { useNetwork } from '@vueuse/core'
 
-const userData=reactive({name:'Aseel Bdoor',age:0});
+const userData = reactive({ name: 'Aseel Bdoor', age: 0 });
 
-provide('userData',userData); // Providing the data as a provider so it can be accessed by 
+provide('userData', userData); // Providing the data as a provider so it can be accessed by 
 // any child component.
+
+// The online status will be accessible in all components that are nested under this one.
+// This is useful if you want to show different content based on whether or not the user has an internet connection.
+// This is useful for showing offline status or similar functionality.
+const {isOnline} = useNetwork();
+const text = isOnline.value ? 'Online' : 'Offline';
 
 </script>
 
