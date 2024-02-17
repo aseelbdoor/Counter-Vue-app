@@ -2,7 +2,8 @@
 <template>
   <div class="home">
     <h1 ref="appTitleRef" >{{ appTitle }}</h1>
-    <h2 class="title">{{ counterData.title }}:</h2>
+    <!-- <h2 class="title">{{ counterData.title }}:</h2> -->
+    <h2 class="title">{{ store.title }}:</h2>
     <div class="count">
       <section>
         <button @click="decreaseCounter(2)" class="btn">--</button>
@@ -17,7 +18,8 @@
     <p class="description">This counter is {{ oddOrEven }}</p>
     <div class="edit">
       <h3>Edit Counter Title:</h3>
-      <input type="text" name="edit" v-model="counterData.title" v-autofocus />
+      <!-- <input type="text" name="edit" v-model="counterData.title" v-autofocus /> -->
+      <input type="text" name="edit" v-model="store.title" v-autofocus />
     </div>
   </div>
 </template>
@@ -30,6 +32,10 @@ import { ref, reactive, computed, watch,
 
 import {useCounter} from '@/use/useCounter';
 import {vAutofocus} from '@/directives/vAutofocus';
+import { useCounterStore } from '@/stores/counter'
+
+// access the `store` variable anywhere in the component ✨
+const store = useCounterStore()
 
 // const counter = ref(0),
 //   myTitle = ref("My Counter")
@@ -40,6 +46,7 @@ const appTitleRef=ref(null)
 
 // _________________ Counter___________________
 const {counterData, oddOrEven, decreaseCounter, increaseCounter} = useCounter();
+// const {counter} = useCounter();
 
 
 

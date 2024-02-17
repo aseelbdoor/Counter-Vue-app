@@ -1,14 +1,25 @@
-import { ref, reactive, computed, watch, 
-    onBeforeMount, onMounted, onBeforeUnmount, 
-    onUnmounted, onActivated, onDeactivated,
-    onBeforeUpdate, onUpdated, nextTick } from 'vue';
+import {
+  ref,
+  reactive,
+  computed,
+  watch,
+  onBeforeMount,
+  onMounted,
+  onBeforeUnmount,
+  onUnmounted,
+  onActivated,
+  onDeactivated,
+  onBeforeUpdate,
+  onUpdated,
+  nextTick,
+} from "vue";
+
+const counterData = reactive({
+  counter: 0,
+  title: "My Counter",
+});
 
 export function useCounter() {
-  const counterData = reactive({
-    counter: 0,
-    title: "My Counter",
-  });
-
   watch(
     () => counterData.counter, // the getter
     (newCount) => {
@@ -36,10 +47,10 @@ export function useCounter() {
     });
   };
 
-  return{
+  return {
     counterData,
     oddOrEven,
     decreaseCounter,
     increaseCounter,
-  }
+  };
 }
